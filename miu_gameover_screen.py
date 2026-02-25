@@ -3,7 +3,7 @@ from sys import exit
 from miu_screen import Screen
 from miu_settings import GAME_WIDTH, GAME_HEIGHT
 import random
-from miu_highscore import highscore
+import miu_highscore
 
 
 def run_game_over(score, last_animal):
@@ -22,7 +22,7 @@ def run_game_over(score, last_animal):
     # Blöcke mit Text und optionaler Schriftgröße
     labels = [
         "GAME OVER",
-        f"Highscore: {highscore}\nYour Score: {score}",
+        f"Highscore: {miu_highscore.highscore}\nYour Score: {score}",
         "TRY AGAIN",
         "BACK TO MENU"
     ]

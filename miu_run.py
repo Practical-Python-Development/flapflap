@@ -3,7 +3,7 @@ from sys import exit
 import random
 from miu_settings import SOUND_SETTINGS, GAME_WIDTH, GAME_HEIGHT, FROG_START_X, FROG_START_Y, FROG_WIDTH, FROG_HEIGHT, GRAVITY, JUMP_STRENGTH, PIPE_WIDTH, PIPE_HEIGHT, PIPE_OPENING_SPACE, PIPE_SPEED
 from miu_gameover_screen import run_game_over
-from miu_highscore import update_highscore
+import miu_highscore
 from miu_animal import ANIMALS
 
 
@@ -134,7 +134,7 @@ def run_flappy(animal_key):
             move()
             draw()
         else:
-            update_highscore(score)
+            miu_highscore.update_highscore(score)
             action, _ = run_game_over(score, last_animal=animal_key)
 
             if action == "TRY_AGAIN":
