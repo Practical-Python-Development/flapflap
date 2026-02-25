@@ -1,10 +1,12 @@
 import pygame
 from sys import exit
 import random
-from miu_settings import GAME_WIDTH, GAME_HEIGHT, FROG_START_X, FROG_START_Y, FROG_WIDTH, FROG_HEIGHT, GRAVITY, JUMP_STRENGTH, PIPE_WIDTH, PIPE_HEIGHT, PIPE_OPENING_SPACE, PIPE_SPEED
+from miu_settings import SOUND_SETTINGS, GAME_WIDTH, GAME_HEIGHT, FROG_START_X, FROG_START_Y, FROG_WIDTH, FROG_HEIGHT, GRAVITY, JUMP_STRENGTH, PIPE_WIDTH, PIPE_HEIGHT, PIPE_OPENING_SPACE, PIPE_SPEED
 from miu_gameover_screen import run_game_over
 from miu_highscore import update_highscore
 from miu_animal import ANIMALS
+
+
 
 def run_flappy(animal_key):
 
@@ -14,6 +16,17 @@ def run_flappy(animal_key):
     clock = pygame.time.Clock()
 
     config = ANIMALS[animal_key]
+
+    point_sound = pygame.mixer.Sound("assets/sounds/obstacle_sound.wav")
+    point_sound.set_volume(0.05)
+
+    flap_sound = pygame.mixer.Sound("assets/sounds/flap_sound.wav")
+    flap_sound.set_volume(0.3)
+
+    gameover_sound = pygame.mixer.Sound("assets/sounds/gameover_sound.wav")
+    gameover_sound.set_volume(0.1)
+
+
 
     # Hintergrund
     background = pygame.image.load(config["background"])
@@ -62,7 +75,10 @@ def run_flappy(animal_key):
         player.y = max(player.y, 0)
 
         if player.y > GAME_HEIGHT:
+            if SOUND_SETTINGS["game"]:
+                gameover_sound.play()
             game_over = True
+
 
         for pipe in pipes:
             pipe.x += velocity_x
@@ -70,8 +86,12 @@ def run_flappy(animal_key):
             if not pipe.passed and player.x > pipe.x + PIPE_WIDTH:
                 score += 0.5
                 pipe.passed = True
+                if SOUND_SETTINGS["game"]:
+                    point_sound.play()
 
             if player.colliderect(pipe):
+                if SOUND_SETTINGS["game"]:
+                    gameover_sound.play()
                 game_over = True
 
         while pipes and pipes[0].x < -PIPE_WIDTH:
@@ -101,6 +121,8 @@ def run_flappy(animal_key):
             if event.type == pygame.KEYDOWN:
                 if event.key in (pygame.K_SPACE, pygame.K_UP):
                     velocity_y = JUMP_STRENGTH
+                    if SOUND_SETTINGS["game"]:
+                        flap_sound.play()
 
                     if game_over:
                         player.y = FROG_START_Y

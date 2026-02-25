@@ -68,9 +68,9 @@ pygame.display.set_caption("Flap Flap")
 class Main:
     def __init__(self, screen):
         self.screen = screen
-        self.bg_img = pygame.image.load('assets/terrain/bg.png')
+        self.bg_img = pygame.image.load('assets/terrain/frog_background.png')
         self.bg_img = pygame.transform.scale(self.bg_img, (W, H))
-        self.ground_img = pygame.image.load('assets/terrain/ground.png')
+        self.ground_img = pygame.image.load('assets/terrain/frog_ground.png')
         self.ground_scroll = 0
         self.scroll_speed = -6
         self.FPS = pygame.time.Clock()
