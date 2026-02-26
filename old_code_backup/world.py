@@ -95,14 +95,14 @@
         #self.game.show_score(self.player.sprite.score)
 
 import pygame
-from obstacle import Obstacle
-from animal import Animal
-from game import GameIndicator
-from settings import W, H, obstacle_size, obstacle_gap, obstacle_pair_sizes
+from old_code_backup.obstacle import Obstacle
+from old_code_backup.animal1 import Animal
+from old_code_backup.game import GameIndicator
+from old_code_backup.settings import W, H, obstacle_size, obstacle_gap, obstacle_pair_sizes
 import random
 
 class World:
-    def __init__(self, screen):
+    def __init__(self, screen, animal):
         self.screen = screen
         self.world_shift = 0
         self.current_x = 0
@@ -110,6 +110,7 @@ class World:
         self.current_obstacle = None
         self.obstacles = pygame.sprite.Group()
         self.player = pygame.sprite.GroupSingle()
+        self.animal = animal
         self._generate_world()
         self.playing = False
         self.game_over = False

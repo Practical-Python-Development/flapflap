@@ -1,4 +1,4 @@
-# main.py
+# main
 #import pygame
 #import sys
 #from settings import W, H, ground_space
@@ -52,8 +52,10 @@
 # main.py
 import pygame
 import sys
+
 from settings import W, H, ground_space
 from world import World
+from selection_screen import SelectionScreen
 
 pygame.init()
 
@@ -64,13 +66,17 @@ pygame.display.set_caption("Flap Flap")
 class Main:
     def __init__(self, screen):
         self.screen = screen
-        self.bg_img = pygame.image.load('assets/terrain/bg.png')
+        self.bg_img = pygame.image.load('old_assets/terrain/frog_background.png')
         self.bg_img = pygame.transform.scale(self.bg_img, (W, H))
-        self.ground_img = pygame.image.load('assets/terrain/ground.png')
+        self.ground_img = pygame.image.load('old_assets/terrain/frog_ground.png')
         self.ground_scroll = 0
         self.scroll_speed = -6
         self.FPS = pygame.time.Clock()
         self.stop_ground_scroll = False
+
+    selection = SelectionScreen(screen)
+    animal = selection.run()
+    world = World(screen, animal)
 
     def main(self):
         world = World(screen)
