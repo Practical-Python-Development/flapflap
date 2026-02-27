@@ -1,22 +1,20 @@
 import sys
 from pathlib import Path
 
-# von src importieren
+# import from src
 sys.path.append(str(Path(__file__).resolve().parents[1] / "src"))
 
 import pytest
 from unittest.mock import MagicMock, patch
 from screen import Screen
 
-# ------------------------
 # Test: add_blocks und create_cloud
-# ------------------------
-@patch("pygame.transform.scale", side_effect=lambda img, size: img)  # scale gibt Surface zurück
+@patch("pygame.transform.scale", side_effect=lambda img, size: img)
 @patch("pygame.image.load")
 def test_add_blocks_and_clouds(mock_load, mock_scale):
     mock_load.return_value = MagicMock()  # Mock-Surface
     window = MagicMock()
-    screen = Screen(window, "bg.png")  # kein echtes Bild
+    screen = Screen(window, "bg.png")  # no real image
 
     # Test add_blocks
     labels = ["A", "B", "C"]
@@ -39,14 +37,14 @@ def test_move_clouds_removes_offscreen(mock_load, mock_scale):
     window = MagicMock()
     screen = Screen(window, "bg.png")
 
-    # Cloud außerhalb des Bildschirms
+    # Cloud out of screen
     cloud_rect = MagicMock()
     cloud_rect.x = -300
     cloud_rect.width = 50
     screen.clouds.append((cloud_rect, MagicMock()))
 
     screen.move_clouds(speed=-2)
-    assert len(screen.clouds) == 0  # Cloud entfernen
+    assert len(screen.clouds) == 0  # remove cloud
 
 @patch("pygame.transform.scale", side_effect=lambda img, size: img)
 @patch("pygame.image.load")
@@ -56,7 +54,7 @@ def test_draw_calls_blit(mock_font, mock_load, mock_scale):
     window = MagicMock()
     screen = Screen(window, "bg.png")
 
-    # Füge Cloud und Block hinzu
+    # Add cloud and block
     cloud_mock = MagicMock()
     screen.clouds = [(cloud_mock, MagicMock())]
     block_rect = MagicMock()
@@ -72,4 +70,4 @@ def test_draw_calls_blit(mock_font, mock_load, mock_scale):
     screen.draw()
 
     # Assert
-    assert window.blit.called  # mindestens einmal aufgerufen
+    assert window.blit.called # called upon at least once

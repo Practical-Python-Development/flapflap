@@ -27,7 +27,7 @@ cloud_image = pygame.transform.scale(cloud_image, (cloud_width, cloud_height))
 
 ### choosing blocks
 block = pygame.image.load('../assets/starting_screen/start_block.png')
-#sizw
+#size
 block_width = 183
 block_height = 72
 block = pygame.transform.scale(block, (block_width, block_height))
@@ -55,7 +55,9 @@ clouds = []
 ### CLASS
 # cloud class
 class Cloud(pygame.Rect):
+    '''Responsible for storing the current state of the cloud.'''
     def __init__(self, img):
+        '''Initializes the cloud.'''
         pygame.Rect.__init__(self, cloud_x, cloud_y, cloud_width, cloud_height)
         self.img = img
         self.passed = False
@@ -63,6 +65,7 @@ class Cloud(pygame.Rect):
 
 ### FUNCTION
 def draw():
+    '''draws the cloud.'''
     window.blit(background, (0, 0))
 
     for cloud in clouds:
@@ -76,6 +79,7 @@ def draw():
         window.blit(label, label_rect)
 
 def move():
+    '''Applies horizontal movement to the cloud.'''
     for cloud in clouds:
         cloud.x += velocity_x
 
@@ -83,6 +87,7 @@ def move():
         clouds.pop(0) # removes first element from the list
 
 def create_clouds():
+    '''Creates random clouds.'''
     random_cloud_y = random.uniform(GAME_HEIGHT / 4,GAME_HEIGHT * 3 / 4)
 
     cloud = Cloud(cloud_image)

@@ -4,25 +4,28 @@ import pygame
 import random
 from settings import GAME_WIDTH, GAME_HEIGHT, BLOCK_WIDTH, BLOCK_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT, CIRCLE_WIDTH, CIRCLE_HEIGHT, TEXT_FONT_SIZE, SETTINGS_BUTTON_WIDTH, SETTINGS_BUTTON_HEIGHT
 class Screen:
+    '''
+    Screen renderer
+    draws background, clouds, buttons, ...
+    '''
     def __init__(self, window, background_path, blocks=None, block_image_path=None, show_settings= True):
+        '''Initializes screen layout.'''
         self.window = window
         self.background = pygame.image.load(background_path)
 
-        # Block-Bild laden, falls vorhanden
         self.block_image = None
         if block_image_path:
             img = pygame.image.load(block_image_path)
             self.block_image = pygame.transform.scale(img, (BLOCK_WIDTH, BLOCK_HEIGHT))
 
-        # Blöcke: Liste von (Label, pygame.Rect)
         self.blocks = blocks if blocks else []
 
-        # Wolken
+        # Cloud system
         self.clouds = []
         self.cloud_image = pygame.image.load('../assets/starting_screen/start_obstacle.png')
         self.cloud_image = pygame.transform.scale(self.cloud_image, (209, 120))
 
-        # Settings-Icon
+        # Settings button
         self.settings_image = pygame.image.load("../assets/settings_screen/seetings_button.png")
         self.settings_image = pygame.transform.scale(self.settings_image, (SETTINGS_BUTTON_WIDTH, SETTINGS_BUTTON_HEIGHT))
 
@@ -36,6 +39,7 @@ class Screen:
 
 
     def add_blocks(self, labels, start_y, spacing, x_positions=None, font_scales=None):
+        '''Create interactive blocks with text (buttons)'''
         self.blocks = []
         for i, label in enumerate(labels):
 
@@ -50,24 +54,26 @@ class Screen:
 
             scale = font_scales[i] if font_scales else 1
 
-            if isinstance(label, str):
-                # Falls der String Zeilenumbruch hat, splitten
+            if isinstance(label, str): # split string in case of line breaks
                 lines = label.split("\n")
             else:
-                lines = label  # schon Liste
+                lines = label
             self.blocks.append((rect, lines, scale))
 
     def create_cloud(self):
+        '''Creates decorative cloud.'''
         cloud_y = random.uniform(GAME_HEIGHT / 4, GAME_HEIGHT * 3 / 4)
         cloud_rect = pygame.Rect(GAME_WIDTH, cloud_y, 209, 120)
         self.clouds.append((cloud_rect, self.cloud_image))
 
     def move_clouds(self, speed):
+        '''Moves cloud horizontally.'''
         for cloud, img in self.clouds:
             cloud.x += speed
         self.clouds = [(c, img) for c, img in self.clouds if c.x + c.width > 0]
 
     def draw(self):
+        '''Render screen: background, buttons, clouds'''
         self.window.blit(self.background, (0, 0))
         if self.show_settings:
             self.window.blit(self.settings_image, self.settings_rect)
@@ -80,14 +86,14 @@ class Screen:
             scaled_size = int(TEXT_FONT_SIZE * scale)
             font = pygame.font.SysFont("Comic Sans MS", scaled_size)
 
-            # Berechne Höhe der Zeilen
+            # calculate heights of the lines
             scaled_size = int(TEXT_FONT_SIZE * scale)
             font = pygame.font.SysFont("Comic Sans MS", scaled_size)
             line_height = font.get_height()
             total_height = line_height * len(label)
 
             for i, line in enumerate(label):
-                # Wenn line kein String ist, konvertiere ihn
+                # convert to string if needed
                 if not isinstance(line, str):
                     line = str(line)
 

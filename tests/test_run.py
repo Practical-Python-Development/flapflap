@@ -1,7 +1,7 @@
 import sys
 from pathlib import Path
 
-# von src importieren
+# import from src
 sys.path.append(str(Path(__file__).resolve().parents[1] / "src"))
 
 import pytest
@@ -20,7 +20,7 @@ def test_player_falls_due_to_gravity(mock_scale, mock_load):
     mock_load.return_value = pygame.Surface((10, 10))
     mock_scale.side_effect = lambda img, size: img
     player = Player("dummy.png", {})
-    player.velocity_y = 1  # Gravity sichtbar
+    player.velocity_y = 1  # Gravity
     start_y = player.rect.y
 
     # Act
@@ -76,14 +76,14 @@ def test_pipe_cleanup(mock_rotate, mock_scale, mock_load):
     # Arrange
     mock_load.return_value = pygame.Surface((10, 10))
     mock_scale.side_effect = lambda img, size: img
-    mock_rotate.side_effect = lambda img, angle: img  # Korrekt 2 Argumente
+    mock_rotate.side_effect = lambda img, angle: img  # 2 arguments
 
     manager = PipeManager("dummy.png")
 
-    # Fake pipe außerhalb des Bildschirms
+    # Fake pipe out of screen
     class DummyPipe:
         def __init__(self):
-            self.x = -1000  # update() benutzt pipe.x
+            self.x = -1000  # update() uses pipe.x
             self.img = None
             self.passed = False
             self.type = "top"

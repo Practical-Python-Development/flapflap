@@ -1,7 +1,7 @@
 # settings.py
 
 ### CONSTANTS
-from json import JSONDecoder
+# from json import JSONDecoder
 
 # BACKGOUND
 GAME_WIDTH = 360

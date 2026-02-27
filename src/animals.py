@@ -1,5 +1,5 @@
 # animals.py
-
+# assigns background, player and pipe pictures to selected animal
 ANIMALS = {
     "FROG": {
         "background": "../assets/frog/frog_background.png",

@@ -1,13 +1,12 @@
 import sys
 from pathlib import Path
 
-# von src importieren
+# import from src
 sys.path.append(str(Path(__file__).resolve().parents[1] / "src"))
 
 import pytest
 from unittest.mock import patch, MagicMock
 import gameover_screen
-
 import pygame
 from unittest.mock import patch, MagicMock
 
@@ -20,7 +19,7 @@ def test_run_game_over_try_again(mock_events, mock_font, mock_display, mock_load
     window = MagicMock()
     mock_display.return_value = window
 
-    # KEYDOWN Space simulieren
+    # simulate KEYDOWN Space
     event = MagicMock()
     event.type = pygame.KEYDOWN
     event.key = pygame.K_SPACE

@@ -8,13 +8,14 @@ from settings import GAME_WIDTH, GAME_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT, CIRCL
 
 
 def run_settings():
+    '''initializes the setting screen.'''
     pygame.init()
     window = pygame.display.set_mode((GAME_WIDTH, GAME_HEIGHT))
     clock = pygame.time.Clock()
 
     screen = Screen(window, '../assets/starting_screen/start_background.png', block_image_path='../assets/starting_screen/start_block.png', show_settings=False)
 
-    # Buttons und Circles
+    # Buttons and circles
     button_image = pygame.image.load("../assets/settings_screen/button.png")
     button_image = pygame.transform.scale(button_image, (BUTTON_WIDTH, BUTTON_HEIGHT))
 
@@ -26,14 +27,12 @@ def run_settings():
         SOUND_SETTINGS.get("game", True)
     ]
 
-    # Back-Button
+    # Back button
     back_button_image = pygame.image.load("../assets/settings_screen/back_button.png")
     back_button_image = pygame.transform.scale(back_button_image, (SETTINGS_BUTTON_WIDTH, SETTINGS_BUTTON_HEIGHT))
     back_button_rect = back_button_image.get_rect(topright=(GAME_WIDTH - 20, 20))
 
-
-
-    # Anzeige-Labels mit Zeilen und Skalierung
+    # Labels and scales
     labels = [
         (["SETTINGS"]),
         (["BACKGROUND SOUND"]),
@@ -47,24 +46,24 @@ def run_settings():
     CLOUD_EVENT = pygame.USEREVENT + 1
     pygame.time.set_timer(CLOUD_EVENT, 3000)
 
-    # Button-Rechtecke erstellen
+    # creates button
     button_rects = []
     circle_rects = []
 
-    # x-Offset rechts neben Block
+    # x-Offset next to block
     x_offset = BLOCK_WIDTH + 20
 
-    # Die unteren drei Blöcke
+    # lower three buttons
     for i in range(1, 3):
         block_rect, _, _ = screen.blocks[i]
 
-        # Button-Rechteck rechts vom Block
+        # Button right to the Block
         b_rect = button_image.get_rect(
             midleft=(block_rect.right + 20, block_rect.centery)
         )
         button_rects.append(b_rect)
 
-        # Circle-Rechteck
+        # Circle
         circle_rects.append(circle_image.get_rect())
 
 
@@ -88,22 +87,22 @@ def run_settings():
                 if back_button_rect.collidepoint(pos):
                     return
 
-                # Button-Klicks
+                # Button-clicks
                 for i in range(2):
                     if button_rects[i].collidepoint(pos):
-                        # Status umschalten
+                        # Status
                         button_status[i] = not button_status[i]
 
-                        # Sound-Einstellungen aktualisieren
-                        if i == 0:  # Hintergrundmusik
+                        # change in sound-settings
+                        if i == 0:  # background music
                             SOUND_SETTINGS["background"] = button_status[i]
                             from sound import update_background_music
-                            update_background_music()  # sofort reagieren
+                            update_background_music()  # update music
 
                         elif i == 1:  # Game-Sounds
                             SOUND_SETTINGS["game"] = button_status[i]
 
-        # ZEICHNEN
+        # DRAW
         screen.draw()
 
         for i in range(2):
@@ -111,7 +110,7 @@ def run_settings():
             # Button
             screen.window.blit(button_image, button_rects[i])
 
-            # Circle-Position
+            # Circle position
             if button_status[i]:  # ON
                 circle_rects[i].midright = (
                     button_rects[i].right - 8,
@@ -126,7 +125,7 @@ def run_settings():
             # Circle
             screen.window.blit(circle_image, circle_rects[i])
 
-            # Status-Text
+            # Status text
             status_text = font.render(
                 "ON" if button_status[i] else "OFF",
                 True,

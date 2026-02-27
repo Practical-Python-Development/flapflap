@@ -2,10 +2,11 @@
 
 import os
 
-highscore = 0.0  # globaler Highscore
+highscore = 0.0  # global Highscore
 HIGH_SCORE_FILE = os.path.join(os.path.dirname(__file__), "highscore.txt")
 
 def load_highscore():
+    '''Loads highscore file.'''
     global highscore
     try:
         with open(HIGH_SCORE_FILE, "r") as f:
@@ -16,10 +17,12 @@ def load_highscore():
         highscore = 0.0
 
 def save_highscore():
+    '''Saves highscore to highscore.txt'''
     with open(HIGH_SCORE_FILE, "w") as f:
         f.write(str(highscore))
 
 def update_highscore(score):
+    '''Updates new highscore'''
     global highscore
     if score > highscore:
         highscore = score

@@ -8,6 +8,7 @@ from run import run_flappy
 from setting_screen import run_settings
 
 def run_selection():
+    '''Initializes the selection screen.'''
     pygame.init()
     window = pygame.display.set_mode((GAME_WIDTH, GAME_HEIGHT))
     clock = pygame.time.Clock()

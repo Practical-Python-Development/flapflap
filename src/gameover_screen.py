@@ -8,11 +8,16 @@ import highscore
 
 
 def run_game_over(score, last_animal):
+    '''
+    Displays game over screen and handles player interactions.
+    Restart game or return to menu
+    Shows players score and highscore
+    '''
     pygame.init()
     window = pygame.display.set_mode((GAME_WIDTH, GAME_HEIGHT))
     clock = pygame.time.Clock()
 
-    # Screen Setup mit Settings-Button
+    # Screen Setup
     screen = Screen(
         window,
         background_path='../assets/starting_screen/start_background.png',
@@ -20,7 +25,7 @@ def run_game_over(score, last_animal):
         show_settings=False
     )
 
-    # Blöcke mit Text und optionaler Schriftgröße
+    # labels for blocks and font size
     labels = [
         "GAME OVER",
         f"Highscore: {highscore.highscore}\nYour Score: {score}",
@@ -48,7 +53,6 @@ def run_game_over(score, last_animal):
                 pos = pygame.mouse.get_pos()
                 for rect, lines, _ in screen.blocks:
                     if rect.collidepoint(pos):
-                        # Wir nehmen nur den ersten Eintrag jeder Zeilenliste zum Checken
                         first_line = lines[0]
                         if first_line == "TRY AGAIN":
                             return "TRY_AGAIN", last_animal
@@ -58,7 +62,7 @@ def run_game_over(score, last_animal):
             if event.type == CLOUD_EVENT:
                 screen.create_cloud()
 
-        screen.draw()  # Alles: Hintergrund, Blöcke, Text, Wolken, Settings
+        screen.draw()  # draws background, blocks, buttons, clouds
         screen.move_clouds(speed=-2)
         pygame.display.update()
         clock.tick(60)
