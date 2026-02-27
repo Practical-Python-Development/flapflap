@@ -1,3 +1,5 @@
+# highscore.py
+
 import os
 
 highscore = 0.0  # globaler Highscore

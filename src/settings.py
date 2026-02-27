@@ -1,3 +1,5 @@
+# settings.py
+
 ### CONSTANTS
 from json import JSONDecoder
 
@@ -32,9 +34,6 @@ SOUND_SETTINGS = {
 
 # TEXT
 TEXT_FONT_SIZE = 30
-
-# HIGHSCORE
-#HIGHSCORE_FILE = "highscore.txt
 
 # PIPE
 PIPE_WIDTH = 50

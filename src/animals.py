@@ -1,3 +1,5 @@
+# animals.py
+
 ANIMALS = {
     "FROG": {
         "background": "../assets/frog/frog_background.png",

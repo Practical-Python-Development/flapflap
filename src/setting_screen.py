@@ -1,7 +1,9 @@
+# setting_screen.py
+
 import pygame
 from sys import exit
-from miu_screen import Screen
-from miu_settings import GAME_WIDTH, GAME_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT, CIRCLE_WIDTH, CIRCLE_HEIGHT, \
+from screen import Screen
+from settings import GAME_WIDTH, GAME_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT, CIRCLE_WIDTH, CIRCLE_HEIGHT, \
     SETTINGS_BUTTON_WIDTH, SETTINGS_BUTTON_HEIGHT, BLOCK_WIDTH, SOUND_SETTINGS
 
 
@@ -70,7 +72,7 @@ def run_settings():
 
     while True:
 
-        # ---------- EVENTS ----------
+        # EVENTS
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -92,39 +94,39 @@ def run_settings():
                         # Status umschalten
                         button_status[i] = not button_status[i]
 
-                        # ⚡ Sound-Einstellungen aktualisieren
+                        # Sound-Einstellungen aktualisieren
                         if i == 0:  # Hintergrundmusik
                             SOUND_SETTINGS["background"] = button_status[i]
-                            from miu_sound import update_background_music
+                            from sound import update_background_music
                             update_background_music()  # sofort reagieren
 
                         elif i == 1:  # Game-Sounds
                             SOUND_SETTINGS["game"] = button_status[i]
 
-        # ---------- ZEICHNEN ----------
+        # ZEICHNEN
         screen.draw()
 
         for i in range(2):
 
-            # 1️⃣ Button zeichnen (WICHTIG!)
+            # Button
             screen.window.blit(button_image, button_rects[i])
 
-            # 2️⃣ Circle-Position setzen
-            if button_status[i]:  # ON → rechts
+            # Circle-Position
+            if button_status[i]:  # ON
                 circle_rects[i].midright = (
                     button_rects[i].right - 8,
                     button_rects[i].centery
                 )
-            else:  # OFF → links
+            else:  # OFF
                 circle_rects[i].midleft = (
                     button_rects[i].left + 8,
                     button_rects[i].centery
                 )
 
-            # 3️⃣ Circle zeichnen
+            # Circle
             screen.window.blit(circle_image, circle_rects[i])
 
-            # 4️⃣ Status-Text
+            # Status-Text
             status_text = font.render(
                 "ON" if button_status[i] else "OFF",
                 True,

@@ -1,7 +1,8 @@
+# screen.py
+
 import pygame
 import random
-#from miu_settings import GAME_WIDTH, GAME_HEIGHT, BLOCK_WIDTH, BLOCK_HEIGHT, TEXT_FONT_SIZE, SETTINGS_BUTTON_WIDTH, SETTINGS_BUTTON_HEIGHT
-from miu_settings import GAME_WIDTH, GAME_HEIGHT, BLOCK_WIDTH, BLOCK_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT, CIRCLE_WIDTH, CIRCLE_HEIGHT, TEXT_FONT_SIZE, SETTINGS_BUTTON_WIDTH, SETTINGS_BUTTON_HEIGHT
+from settings import GAME_WIDTH, GAME_HEIGHT, BLOCK_WIDTH, BLOCK_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT, CIRCLE_WIDTH, CIRCLE_HEIGHT, TEXT_FONT_SIZE, SETTINGS_BUTTON_WIDTH, SETTINGS_BUTTON_HEIGHT
 class Screen:
     def __init__(self, window, background_path, blocks=None, block_image_path=None, show_settings= True):
         self.window = window
@@ -79,7 +80,7 @@ class Screen:
             scaled_size = int(TEXT_FONT_SIZE * scale)
             font = pygame.font.SysFont("Comic Sans MS", scaled_size)
 
-            # 1️⃣ Berechne Höhe der Zeilen
+            # Berechne Höhe der Zeilen
             scaled_size = int(TEXT_FONT_SIZE * scale)
             font = pygame.font.SysFont("Comic Sans MS", scaled_size)
             line_height = font.get_height()
