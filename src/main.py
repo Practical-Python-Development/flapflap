@@ -18,7 +18,7 @@ class GameInitializer:
     """
 
     @staticmethod
-    def initialize():
+    def initialize() -> None:
         """Initializes pygame, sound system and highscore."""
         pygame.init()
         pygame.mixer.init()
@@ -28,16 +28,18 @@ class GameInitializer:
 
 
 class MenuRunner:
+    last_animal: str | None
+    window: pygame.Surface
     """Controls game loop (selection, starting, gameover, ..."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Saves last selected animal for replay."""
         self.last_animal = None
 
         #GameInitializer.initialize()
         self.window = pygame.display.set_mode((GAME_WIDTH, GAME_HEIGHT))
 
-    def run(self):
+    def run(self) -> None:
         """Runs main game loop"""
         update_background_music()
 
