@@ -11,11 +11,21 @@ from pathlib import Path
 ASSETS_PATH = Path(__file__).parents[1] / "assets"
 
 
-def run_selection():
-    """Initializes the selection screen."""
+def run_selection(window:pygame.Surface) -> str:
+    """Initializes the selection screen.
+
+    Parameters
+    ----------
+    window : pygame.Surface
+        The main game window to draw on.
+
+    Returns
+    -------
+    str
+        The selected animal."""
     # pygame.init()
     window = pygame.display.set_mode((GAME_WIDTH, GAME_HEIGHT))
-    clock = pygame.time.Clock()
+    #clock = pygame.time.Clock()
 
     labels = ["FROG", "HAMSTER", "PENGUIN", "DOG"]
     screen = Screen(
@@ -48,4 +58,4 @@ def run_selection():
         screen.move_clouds(speed=-2)
         screen.draw()
         pygame.display.update()
-        clock.tick(60)
+        #clock.tick(60)
