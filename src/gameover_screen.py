@@ -10,7 +10,7 @@ from pathlib import Path
 ASSETS_PATH = Path(__file__).parents[1] / "assets"
 
 
-def run_game_over(score, last_animal):
+def run_game_over(score: float, last_animal:str) -> tuple[str,str | None]:
     """
     Displays game over screen and handles player interactions.
     Restart game or return to menu
@@ -18,7 +18,8 @@ def run_game_over(score, last_animal):
     """
     pygame.init()
     window = pygame.display.set_mode((GAME_WIDTH, GAME_HEIGHT))
-    clock = pygame.time.Clock()
+    #clock = pygame.time.Clock()
+    clock: pygame.time.Clock = pygame.time.Clock()
 
     # Screen Setup
     screen = Screen(
