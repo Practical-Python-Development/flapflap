@@ -3,10 +3,11 @@
 import pygame
 from selection import run_selection
 from gameover_screen import run_game_over
-from highscore import load_highscore, check_and_update_highscore
+from highscore import check_and_update_highscore
 from run import run_flappy
 from sound import update_background_music
 from pathlib import Path
+from settings import GAME_WIDTH, GAME_HEIGHT
 
 ASSETS_PATH = Path(__file__).parents[1] / "assets"
 
@@ -26,14 +27,15 @@ class GameInitializer:
         pygame.mixer.music.set_volume(0.1)
 
 
-class Game:
+class MenuRunner:
     """Controls game loop (selection, starting, gameover, ..."""
 
     def __init__(self):
         """Saves last selected animal for replay."""
         self.last_animal = None
 
-        GameInitializer.initialize()
+        #GameInitializer.initialize()
+        self.window = pygame.display.set_mode((GAME_WIDTH, GAME_HEIGHT))
 
     def run(self):
         """Runs main game loop"""
