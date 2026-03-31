@@ -6,10 +6,10 @@ Players try to navigate their chosen animal through an endless series of randoml
 This project is a fun way to practice game development, object-oriented programming, and handling user input and collisions.
 
 ## Table of Contents 
-- [Features]
-- [Installation] 
-- [Usage]
-- [Project structure]
+- Features
+- Installation
+- Usage
+- Project structure
 
 ## Features
 - Selection between different animals 
@@ -64,13 +64,25 @@ Make sure you have Python 3.12 or higher installed.
 ```text
 flapflap/
 │
-├── main.py
-├── player.py 
-├── obstacles.py 
-├── menu.py 
 ├── assets/
+├── src
+│    └── main.py
+│    └── run.py
+│    └── animals.py
+│    └── game_state.py
+│    └── gameover_screen.py
+│    └── highscore.py
+│    └── highscore.txt
+│    └── pipes.py
+│    └── player.py
+│    └── score.py
+│    └── screen.py
+│    └── selection.py
+│    └── selection_screen.py
+│    └── setting_screen.py
+│    └── settings.py
+│    └── sound.py
 ├── tests/
-│   └── test_main.py
 │
 ├── requirements.txt
 ├── LICENSE 
@@ -79,12 +91,12 @@ flapflap/
 
 ## Architecture
 
-- **Main.py** handles program flow (menu → game → game over → settings)
-- **miu_run.py** contains the game loop and game mechanics
-- **miu_highscore.py** manages persistent highscore storage
-- **miu_sound.py** handles background music and sound effects
-- **miu_screen.py** provides reusable screen and block rendering logic
-- **miu_selection_screen_updated.py** and **miu_gameover_screen.py** handle UI screens
+- **main.py** handles program flow (menu → game → game over → settings)
+- **run.py** contains the game loop and game mechanics
+- **highscore.py** manages persistent highscore storage
+- **sound.py** handles background music and sound effects
+- **screen.py** provides reusable screen and block rendering logic
+- **selection.py** and **gameover_screen.py** handle UI screens
 
 This separation allows for easier maintenance, unit testing, and future feature expansion.
 
@@ -95,18 +107,10 @@ All images were drawn with procreate by us.
 #### Sounds 
 All sounds were made with Garageband by us. 
 
-## TODO
+## Possible features with more time
 
-- drawing 
-  - animals 
-  - background 
-  - pipes 
-- coding 
-- changing Project structure in the READme  
-- sounds 
-- settings 
-- highscore 
-- animation ? 
-- simplify code 
-- docstrings !!! 
-- change it so that SPACE is also a sign for retry 
+- Storyline and boss fights
+- items
+- animation of animals (jump up and down)
+- muliplayer mode
+- selecting difficulty level (speed and size of gap)
